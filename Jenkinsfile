@@ -55,5 +55,19 @@ pipeline {
                 }
             }
          }
+		 
+		 stage('Docker deploy'){
+            steps {
+               
+                sh 'docker run -itd -p  8089:8089 dhiraj371985/playjava:${BUILD_NUMBER}'
+            }
+        }
+
+        
+        stage('Archving') { 
+            steps {
+                 archiveArtifacts '**/target/*.jar'
+            }
+        }
    }
  }
